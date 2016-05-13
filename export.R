@@ -20,6 +20,7 @@ export("setFolder", "exprt", "mexprt")
 }
 
 .pathName <- function(fn, version = FALSE) {
+    fn <- gsub("[\\.\\_]", "-", fn)
 
     if (version) {
         ver <- paste0(" (ver. ", .versionNumber(fn), ")")
@@ -48,7 +49,7 @@ exprt(x ~ data.frame) %m% {
 }
 
 .exprt.backbone <- function(tb, name) {
-    write.csv2(tb, .pathName(name))
+    write.csv2(tb, .pathName(name), row.names = FALSE)
     cat(.pathName(name), "is done o_O\n")
 }
 
